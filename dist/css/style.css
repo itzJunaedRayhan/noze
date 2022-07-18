@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Raleway:wght@400;500;700&display=swap');
 
 /*
 ! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
@@ -429,8 +429,25 @@ body{
   font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6{
-  font-family: 'Roboto', sans-serif;
+h1, h2, h3, h4, h5, h6, p{
+  font-family: 'Poppins', sans-serif;
+}
+
+.active {
+  color: #654A9B !important;
+}
+
+.active:hover {
+  color : #B9B0E4 !important;
+}
+
+.btn {
+  background: #654A9B;
+  font-size: 15px;
+  padding: 15px 32px;
+  border-radius: 5px;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
 }
 
 *, ::before, ::after{
@@ -478,54 +495,252 @@ h1, h2, h3, h4, h5, h6{
   --tw-backdrop-sepia:  ;
 }
 
+.container{
+  width: 100%;
+}
+
+@media (min-width: 320px){
+  .container{
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 576px){
+  .container{
+    max-width: 576px;
+  }
+}
+
+@media (min-width: 768px){
+  .container{
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 990px){
+  .container{
+    max-width: 990px;
+  }
+}
+
+@media (min-width: 1350px){
+  .container{
+    max-width: 1350px;
+  }
+}
+
+.fixed{
+  position: fixed;
+}
+
+.top-0{
+  top: 0px;
+}
+
+.left-0{
+  left: 0px;
+}
+
+.z-20{
+  z-index: 20;
+}
+
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-7{
+  margin-top: 1.75rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
+}
+
+.mr-5{
+  margin-right: 1.25rem;
+}
+
+.-ml-5{
+  margin-left: -1.25rem;
+}
+
 .flex{
   display: flex;
 }
 
-.h-16{
-  height: 4rem;
+.h-\[65px\]{
+  height: 65px;
 }
 
 .h-screen{
   height: 100vh;
 }
 
-.w-16{
-  width: 4rem;
+.h-\[\]{
+  height: ;
+}
+
+.h-\[90vh\]{
+  height: 90vh;
+}
+
+.h-\[95vh\]{
+  height: 95vh;
+}
+
+.max-h-\[700px\]{
+  max-height: 700px;
 }
 
 .w-full{
   width: 100%;
 }
 
+.w-\[460px\]{
+  width: 460px;
+}
+
+.max-w-\[550px\]{
+  max-width: 550px;
+}
+
+.max-w-\[460px\]{
+  max-width: 460px;
+}
+
 .items-center{
   align-items: center;
 }
 
-.justify-center{
-  justify-content: center;
+.justify-between{
+  justify-content: space-between;
 }
 
-.bg-gray-500{
+.justify-around{
+  justify-content: space-around;
+}
+
+.justify-evenly{
+  justify-content: space-evenly;
+}
+
+.divide-x-\[30px\] > :not([hidden]) ~ :not([hidden]){
+  --tw-divide-x-reverse: 0;
+  border-right-width: calc(30px * var(--tw-divide-x-reverse));
+  border-left-width: calc(30px * calc(1 - var(--tw-divide-x-reverse)));
+}
+
+.divide-transparent > :not([hidden]) ~ :not([hidden]){
+  border-color: transparent;
+}
+
+.border{
+  border-width: 1px;
+}
+
+.border-b{
+  border-bottom-width: 1px;
+}
+
+.border-border-color{
+  --tw-border-opacity: 1;
+  border-color: rgb(208 203 230 / var(--tw-border-opacity));
+}
+
+.border-red-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.bg-white{
   --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.text-center{
-  text-align: center;
+.bg-\[\#F3F2F8\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 242 248 / var(--tw-bg-opacity));
+}
+
+.p-14{
+  padding: 3.5rem;
+}
+
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-9{
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+
+.pt-24{
+  padding-top: 6rem;
+}
+
+.pt-28{
+  padding-top: 7rem;
+}
+
+.font-poppins{
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-sm{
+  font-size: 15px;
 }
 
 .text-lg{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 17px;
 }
 
-.text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-6xl{
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
-.text-black{
+.font-medium{
+  font-weight: 500;
+}
+
+.font-normal{
+  font-weight: 400;
+}
+
+.font-bold{
+  font-weight: 700;
+}
+
+.text-text-secondary{
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
+  color: rgb(185 176 228 / var(--tw-text-opacity));
+}
+
+.text-text-color{
+  --tw-text-opacity: 1;
+  color: rgb(107 90 120 / var(--tw-text-opacity));
+}
+
+.text-secondary{
+  --tw-text-opacity: 1;
+  color: rgb(33 5 69 / var(--tw-text-opacity));
+}
+
+.transition-all{
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300{
+  transition-duration: 300ms;
+}
+
+.hover\:text-primary:hover{
+  --tw-text-opacity: 1;
+  color: rgb(101 74 155 / var(--tw-text-opacity));
 }

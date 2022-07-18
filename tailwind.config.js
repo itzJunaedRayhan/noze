@@ -7,15 +7,23 @@ module.exports = {
       'sm': '576px',
       'md': '768px',
       'lg': '990px',
-      'xl': '1200px'
+      'xl': '1350px'
     },
     extend: {
       fontFamily: {
         poppins: "'Poppins', sans-serif",
-        roboto: "'Roboto', sans-serif"
+        raleway: "'Raleway', sans-serif"
+      },
+      fontSize: {
+        sm: "15px",
+        lg: "17px"
       },
       colors: {
-        'primary': '#FD3D57'
+        'primary': '#654A9B',
+        'secondary' : '#210545',
+        'text-color' : '#6b5a78',
+        'text-secondary' : '#B9B0E4',
+        'border-color' : '#d0cbe6'
       }
     },
   },

@@ -8,8 +8,36 @@
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
-    <div class="w-full h-screen flex justify-center items-center">
-        <h2 class="text-3xl text-black text-center">Tailwind CSS Boilerplate</h2>
+    <nav class="border-b border-border-color fixed top-0 left-0 w-full z-20">
+        <div class="container mx-auto h-[65px] flex justify-between items-center bg-white">
+            <div class="flex divide-x-[30px] divide-transparent">
+                <a href="#"><img src="./dist/images/logo.png" alt="logo"></a>
+                <ul class="flex divide-x-[30px] divide-transparent">
+                    <li><a class="active text-sm text-text-secondary hover:text-primary transition-all duration-300" href="#">Overview</a></li>
+                    <li><a class="text-text-secondary hover:text-primary" href="#">Specs</a></li>
+                    <li><a class="text-text-secondary hover:text-primary" href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center justify-between">
+                <p class="text-lg px-4 text-text-color">Order for $249</p>
+                <button class="btn font-bold">Pre Order</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto h-[95vh] flex justify-between items-center px-9">
+        <div class="max-w-[550px]">
+            <h1 class="text-6xl text-secondary font-medium">There's something <br>new in the air</h1>
+            <p class="mt-7 mb-8 text-lg text-text-color font-normal">NOZE is an AI powered air quality monitor that works to keep you safe. Breathe easy.</p>
+            <button class="btn font-poppins">Join the Waitlist</button>
+        </div>
+        <img class="max-h-[700px] w-[460px] pt-28 mr-5 -ml-5" src="./dist/images/NOZE-Hero-1.png" alt="banner">
+    </div>
+
+    <div class="bg-[#F3F2F8]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-6xl p-14 text-text-secondary">NOZE is making <br>headlines.</h2>
+        </div>
     </div>
 </body>
 </html>
