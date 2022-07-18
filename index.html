@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
-    <nav class="border-b border-border-color fixed top-0 left-0 w-full z-20">
+    <nav class="border-b bg-white border-border-color fixed top-0 left-0 w-full z-20">
         <div class="container mx-auto h-[65px] flex justify-between items-center bg-white">
             <div class="flex divide-x-[30px] divide-transparent">
                 <a href="#"><img src="./dist/images/logo.png" alt="logo"></a>
@@ -42,8 +42,8 @@
 
 
 
-    <div>
-        <div class="container mx-auto w-full h-screen flex items-end justify-between overflow-hidden">
+    <section class="about-section">
+        <div class="container mx-auto w-full h-screen flex items-center justify-between overflow-hidden">
             <div class="w-1/2 px-6">
                 <div>
                     <h2 class="text-6xl font-medium text-secondary">Anything but <br>ordinary</h2>
@@ -51,26 +51,50 @@
                 </div>
 
                 <div class="mt-12">
-                    <div class="w-full border-l-2 border-border-color pl-9 cursor-pointer">
-                        <h3 class="text-xl text-secondary font-bold uppercase">Nasa inspired</h3>
-                        <p class="text-lg text-text-color py-4">NOZE is powered by a single sensor built on years of NASA innovation. Our technology raises the bar to new heights <a href="#"><img  class="inline" src="./dist/images/info.png" alt="info"></a> by using the digital sense of smell to keep track of the air you're breathing.</p>
+                    <div class="relative about-top w-full border-l-2 border-border-color pl-9 cursor-pointer  before:content-[''] before:absolute before:-left-[2px] before:rounded-sm before:w-[4px] before:h-0 before:bg-secondary before:animate-show-hide-about-one">
+                        <h3 class="text-xl text-secondary font-bold uppercase ">Nasa inspired</h3>
+                        <p class="text-lg text-text-color py-4 about-paragraph-top">NOZE is powered by a single sensor built on years of NASA innovation. Our technology raises the bar to new heights <a href="#"><img  class="inline" src="./dist/images/info.png" alt="info"></a> by using the digital sense of smell to keep track of the air you're breathing.</p>
                     </div>
-                    <div class="w-full border-l-2 my-6 border-border-color pl-9 cursor-pointer">
+                    <div class="relative about-bottom w-full border-l-2 my-6 border-border-color pl-9 cursor-pointer before:content-[''] before:absolute before:-left-[2px] before:rounded-sm before:w-[4px] before:h-0 before:bg-secondary">
                         <h3 class="text-xl text-secondary font-bold uppercase">Engineered to think</h3>
-                        <p class="text-lg text-text-color py-4">NOZE uses artificial intelligence to decode the air around you in real-time, all the time. It actively samples the air every second and breaks things down into specifics so that you can act while it matters.</p>
+                        <p class="display text-lg text-text-color py-4 about-paragraph-bottom">NOZE uses artificial intelligence to decode the air around you in real-time, all the time. It actively samples the air every second and breaks things down into specifics so that you can act while it matters.</p>
                     </div>
                 </div>
             </div>
             <div class="w-1/2">
-                <div class=" relative w-[550px] h-[500px] overflow-hidden">
-                    <video class="absolute -left-[80px] -bottom-[130px] min-w-[850px] min-h-[850px]" type="video/mp4" autoplay muted loop playsinline src="./dist/videos/m_about1.mp4"></video>
-                    <p class="absolute bottom-[21%] left-[42%] text-text-color italic font-normal text-sm">Engineered by <a class="underline" href="#">Stratuscent inc.</a></p>
+                <div class=" relative w-[550px] h-[500px]">
+                    <video class="absolute right-0 bottom-20 w-4/5 h-4/5 " type="video/mp4" autoplay muted loop playsinline src="./dist/videos/about.mp4"></video>
+                    <p class="absolute bottom-[21%] right-28 text-text-color italic font-normal text-sm">Engineered by <a class="underline" href="#">Stratuscent inc.</a></p>
                 </div>
                 <div class="hidden relative ml-14 w-[550px] h-[500px]">
                     <img class="absolute bottom-0 rounded-full w-full h-full" src="./dist/images/about2.gif" alt="about2" />
                 </div>
             </div>
         </div>
+
+
+        <div class="grid grid-cols-2 px-8 mt-20 mb-52">
+            <div class="">
+                <video class="w-full h-full" src="./dist/videos/NOZEabout1.mp4" autoplay loop muted="muted" playsinline></video>
+            </div>
+            <div class=" pl-8">
+                <h2 class="text-left text-6xl text-secondary mb-12 font-medium">Conquer the Virus</h2>
+                <p class="text-left text-lg my-4 leading-8 text-text-color font-normal">Noze tracks the airborne markers (VOCs) associated with the Coronavirus family. Our AI uses that information to deliver a real-time risk index that will not only tell you if your space is prone to spreading the virus, but whether there's a chance the virus is actually in the air.</p>
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-2 my-8 px-16">
+            <div class="pr-8">
+                <h2 class="text-left text-6xl text-secondary mb-5 font-medium">Break the Mold</h2>
+                <p class="text-left text-lg my-4 leading-8 text-text-color font-normal">NOZE monitors the air for spores and other markers associated with the most common types of indoor mold. Our mold index will tell you if it's likely that there’s mold around and whether your space is in danger of being a breeding ground.</p>
+            </div>
+            <div>
+                <video class="w-full h-full" src="./dist/videos/NOZEabout2.mp4" autoplay loop muted="muted" playsinline></video>
+            </div>
+        </div>
     </div>
+
+    <script src="./dist/js/main.js"></script>
 </body>
 </html>

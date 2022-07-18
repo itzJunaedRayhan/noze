@@ -16,7 +16,7 @@ module.exports = {
       },
       fontSize: {
         sm: "15px",
-        lg: "17px"
+        md: "17px"
       },
       colors: {
         'primary': '#654A9B',
@@ -24,7 +24,21 @@ module.exports = {
         'text-color' : '#6b5a78',
         'text-secondary' : '#B9B0E4',
         'border-color' : '#d0cbe6'
-      }
+      },
+      keyframes: {
+        about: {
+          '0%' : { height: '0px' },
+          '100%': { height: '100%' },
+        },
+        p: {
+          '0%' : { height: '100%' },
+          '100%': { height: '0%' },
+        }
+      },
+      animation: {
+        'show-hide-about-one': 'about 7s 0s linear infinite',
+        'AnimateP' : 'p 7s linear  infinite'
+      },
     },
   },
   plugins: [],

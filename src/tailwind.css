@@ -38,4 +38,8 @@
     .btn:hover {
         background: #5b438c;
     }
+
+    .display {
+        display : none;
+    }
 }
