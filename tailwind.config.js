@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./*.{html,js}'],
+  purge: ['./*.{html,js}', './dist/pages/*.{html,js}'],
   theme: {
     screens: {
       'xs': '320px',
@@ -23,6 +23,7 @@ module.exports = {
         'secondary' : '#210545',
         'text-color' : '#6b5a78',
         'text-secondary' : '#B9B0E4',
+        'text-ternary' : '#f3f2f8',
         'border-color' : '#d0cbe6'
       },
       keyframes: {

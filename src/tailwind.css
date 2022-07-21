@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
     body {
         @apply font-poppins;
     }
@@ -14,21 +17,19 @@
     h4,
     h5,
     h6,
-    p {
+    p,
+    li {
         @apply font-poppins;
     }
-    .active {
+    .active-li {
         color: #654A9B !important;
-    }
-
-    .active:hover {
-        color : #B9B0E4 !important;
+        font-weight: 700;
     }
 
     .btn {
         background: #654A9B;
         font-size: 15px;
-        padding: 15px 32px;
+        padding: 12px 32px;
         border-radius: 5px;
         color: #fff;
         font-family: 'Raleway', sans-serif;

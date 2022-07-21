@@ -6,94 +6,494 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOZE</title>
     <link rel="stylesheet" href="./dist/css/style.css">
+    <!-- boxIcons -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./dist/css/swiper-bundle.min.css"/>
+    <script src="./dist/js/Swiper-bundle.min.js"></script>
 </head>
 <body>
-    <nav class="border-b bg-white border-border-color fixed top-0 left-0 w-full z-20">
+    <!--===================================     Navigation For Desktop      =====================================-->
+    <nav class="xs:hidden md:block border-b bg-white border-border-color fixed top-0 left-0 w-full px-6 z-20">
         <div class="container mx-auto h-[65px] flex justify-between items-center bg-white">
             <div class="flex divide-x-[30px] divide-transparent">
                 <a href="#"><img src="./dist/images/logo.png" alt="logo"></a>
                 <ul class="flex divide-x-[30px] divide-transparent">
-                    <li><a class="active text-sm text-text-secondary hover:text-primary transition-all duration-300" href="#">Overview</a></li>
-                    <li><a class="text-text-secondary hover:text-primary" href="#">Specs</a></li>
-                    <li><a class="text-text-secondary hover:text-primary" href="#">FAQs</a></li>
+                    <li><a class="active text-sm text-text-secondary hover:text-primary transition-all duration-300" href="#"><span>Overview</span></a></li>
+                    <li><a class="text-text-secondary hover:text-primary" href="./dist/pages/Specification.html">Specs</a></li>
+                    <li><a class="text-text-secondary hover:text-primary" href="#faq-section">FAQs</a></li>
                 </ul>
             </div>
             <div class="flex items-center justify-between">
-                <p class="text-lg px-4 text-text-color">Order for $249</p>
-                <button class="btn font-bold">Pre Order</button>
+                <p class="xs:text-xs sm:text-sm lg:text-lg text-lg px-4 text-text-color">Order for $249</p>
+                <button id="order" class="xs:text-xs sm:text-sm lg:text-lg btn font-bold">Pre Order</button>
             </div>
         </div>
     </nav>
-    
-    <div class="container mx-auto h-[95vh] flex justify-between items-center px-9 overflow-hidden">
-        <div class="max-w-[560px]">
-            <h1 class="text-6xl text-secondary font-medium">There's something <br>new in the air</h1>
-            <p class="mt-7 mb-8 text-lg text-text-color font-normal">NOZE is an AI powered air quality monitor that works to keep you safe. Breathe easy.</p>
-            <button class="btn font-poppins">Join the Waitlist</button>
+
+
+    <!--===================================     Navigation For Mobile      =====================================-->
+    <nav class="md:hidden fixed top-0 left-0 w-full h-[65px] z-30">
+        <div class="relative w-full h-full px-6 flex justify-between items-center bg-white border-b border-border-color">
+            <a href="#"><img src="./dist/images/logo.png" alt="logo"></a>
+            <ul class="dropdown-wrapper w-32 absolute top-4 right-5 bg-white flex flex-col divide-y-[10px] divide-transparent border border-primary rounded-3xl px-3 py-[6px] z-30 transition-all 0.7s ease">
+                <li class="flex"><a class="active text-sm text-text-secondary hover:text-primary transition-all duration-300" href="#">Overview</a><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mt-1 ml-4 dropdown-icon transition-all 0.7s ease cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></li>
+                <ul class="dropdown-items hidden divide-y-[10px] divide-transparent transition-all 0.7s ease">
+                    <li><a class="text-text-secondary hover:text-primary" href="./dist/pages/Specification.html">Specs</a></li>
+                    <li><a class="text-text-secondary hover:text-primary" href="#faq-section">FAQs</a></li>
+                </ul>
+            </ul>
         </div>
-        <img class="max-h-[710px] w-[460px] pt-28 mr-5 -ml-5" src="./dist/images/NOZE-Hero-1.png" alt="banner">
+    </nav>
+
+    <div class="md:hidden fixed bottom-0 left-0 w-full h-[65px] bg-white z-30">
+        <div class="w-full h-full px-6 flex items-center justify-between bg-white border-t border-border-color">
+            <p class="xs:text-sm sm:text-lg text-lg px-4 bg-white text-text-color">Order for $249</p>
+            <button id="mobile-add-to-cart" class="xs:text-xs sm:text-sm md:text-lg btn font-bold">Pre Order</button>
+        </div>
+    </div>
+
+
+
+
+    <!--===================================     Add to cart Section      =====================================-->
+    <div id="cart" class="hideAndShowCart xs:w-[90%] sm:w-[370px] w-[370px] h-screen fixed right-[-100%] top-0 bg-white z-50 border transition-all duration-300">
+        <div class="w-full absolute left-0 top-3">
+            <div class="w-full flex justify-between p-4">
+                <h2 class="text-text-color text-lg">Cart</h2>
+                <span id="close" class="text-3xl text-text-color cursor-pointer"><box-icon color="#6b5a78" size="lg" name='x'></box-icon></span>
+            </div>
+            <div class="flex justify-between p-4">
+                <img class="w-[65px] h-[65px]" src="./dist/images/NOZE-Front_180x180.png" alt="">
+                <div>
+                    <p class="text-sm text-text-color">Noze | Smart Air Quality Monitor</p>
+                    <div class="flex justify-between my-3">
+                        <div class="border rounded-sm w-24 grid grid-cols-3 items-center">
+                            <span id="minus" class="block w-4  text-center cursor-pointer text-text-color"> - </span>
+                            <span id="quantity" class="block w-6  text-center border-l border-r text-text-color text-lg font-medium mx-1">10</span>
+                            <span id="plus" class="block w-4 text-center cursor-pointer text-text-color"> + </span>
+                        </div>
+                        <span id="total" class="text-text-color font-semibold">$2222.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-3 left-2 px-5">
+            <div class="flex justify-between">
+                <p class="text-sm font-light text-text-color">SUBTOTAL</p>
+                <P id="subtotal" class="text-sm text-center font-normal text-text-color">$2222.00</P>
+            </div>
+            <p class="text-xs py-4 font-light text-text-color">Shipping and discount codes are added at checkout.</p>
+            <button class="w-full btn">Checkout</button>
+        </div>
+    </div>
+    <div id="cart-count" class="fixed right-0 top-1/2 w-14 h-20 cursor-pointer rounded-bl-sm rounded-tl-sm bg-primary z-40">
+        <span class="block text-white text-center pt-2 pb-4 text-lg">0</span>
+        <div><span class="ml-4 mt-2"><box-icon color="white" name='cart' ></box-icon></span></div>
+    </div>
+    
+
+
+    <!--===================================     Banner Section      =====================================-->
+    <div class="xs:grid-cols-1 xs:h-screen xs:w-full md:grid-cols-2 md:container md:h-[95vh] mx-auto grid grid-cols-2 items-center px-8 overflow-hidden">
+        <div class="max-w-[560px] xs:pt-24 md:pt-0 flex flex-col justify-center items-center">
+            <h1 class="xs:text-4xl xs:mx-auto md:text-5xl lg:text-6xl text-6xl text-center text-secondary font-medium">There's something <br>new in the air</h1>
+            <p class="xs:mt-4 xs:mb-4 md:text-lg md:mb-8 md:mt-7 mb-8 text-lg text-center text-text-color font-normal">NOZE is an AI powered air quality monitor that works to keep you safe. Breathe easy.</p>
+            <button class="btn font-poppins w-[180px] whitespace-nowrap">Join the Waitlist</button>
+        </div>
+        <img class="xs:pt-4 xs:justify-self-center ml-auto md:justify-self-end md:pt-28 max-h-[710px] w-[460px] justify-self-end pt-28 mr-5" src="./dist/images/NOZE-Hero-1.png" alt="banner">
     </div>
 
     <div class="bg-[#F3F2F8]">
         <div class="container mx-auto px-4">
-            <h2 class="text-6xl p-14 font-medium text-secondary">NOZE is making <br>headlines.</h2>
+            <h2 class="xs:text-4xl xs:text-center md:text-5xl lg:text-6xl md:text-left py-14 font-medium text-secondary">NOZE is making headlines.</h2>
         </div>
     </div>
 
 
 
+    <!--===================================     ABOUT SECTION      =====================================-->
     <section class="about-section">
-        <div class="container mx-auto w-full h-screen flex items-center justify-between overflow-hidden">
-            <div class="w-1/2 px-6">
-                <div>
-                    <h2 class="text-6xl font-medium text-secondary">Anything but <br>ordinary</h2>
-                    <p class="text-lg text-text-color py-4">Some Would say it's out of this world. Thats not far off.</p>
+        <div class="xs:grid-cols-1 lg:grid-cols-2 container mx-auto w-full min-h-screen grid grid-cols-2 items-center overflow-hidden">
+            <div class="px-6">
+                <div class="py-6">
+                    <h2 class="xs:text-4xl xs:text-center lg:text-left lg:text-6xl font-medium text-secondary">Anything but <br>ordinary</h2>
+                    <p class="xs:text-sm xs:text-center lg:text-left md:text-lg text-center text-text-color py-4">Some Would say it's out of this world. Thats not far off.</p>
                 </div>
 
                 <div class="mt-12">
                     <div class="relative about-top w-full border-l-2 border-border-color pl-9 cursor-pointer  before:content-[''] before:absolute before:-left-[2px] before:rounded-sm before:w-[4px] before:h-0 before:bg-secondary before:animate-show-hide-about-one">
                         <h3 class="text-xl text-secondary font-bold uppercase ">Nasa inspired</h3>
-                        <p class="text-lg text-text-color py-4 about-paragraph-top">NOZE is powered by a single sensor built on years of NASA innovation. Our technology raises the bar to new heights <a href="#"><img  class="inline" src="./dist/images/info.png" alt="info"></a> by using the digital sense of smell to keep track of the air you're breathing.</p>
+                        <p class="xs:text-sm md:text-lg text-lg text-text-color py-4 about-paragraph-top">NOZE is powered by a single sensor built on years of NASA innovation. Our technology raises the bar to new heights <a href="#"><img  class="inline" src="./dist/images/info.png" alt="info"></a> by using the digital sense of smell to keep track of the air you're breathing.</p>
                     </div>
                     <div class="relative about-bottom w-full border-l-2 my-6 border-border-color pl-9 cursor-pointer before:content-[''] before:absolute before:-left-[2px] before:rounded-sm before:w-[4px] before:h-0 before:bg-secondary">
                         <h3 class="text-xl text-secondary font-bold uppercase">Engineered to think</h3>
-                        <p class="display text-lg text-text-color py-4 about-paragraph-bottom">NOZE uses artificial intelligence to decode the air around you in real-time, all the time. It actively samples the air every second and breaks things down into specifics so that you can act while it matters.</p>
+                        <p class="xs:text-sm md:text-lg display text-lg text-text-color py-4 about-paragraph-bottom">NOZE uses artificial intelligence to decode the air around you in real-time, all the time. It actively samples the air every second and breaks things down into specifics so that you can act while it matters.</p>
                     </div>
                 </div>
             </div>
-            <div class="w-1/2">
-                <div class=" relative w-[550px] h-[500px]">
+            <div class="">
+                <div class="xs:mx-auto xs:max-w-[280px] lg:max-w-[550px] lg:mx-0 about-video relative max-w-[550px] h-[500px]">
                     <video class="absolute right-0 bottom-20 w-4/5 h-4/5 " type="video/mp4" autoplay muted loop playsinline src="./dist/videos/about.mp4"></video>
-                    <p class="absolute bottom-[21%] right-28 text-text-color italic font-normal text-sm">Engineered by <a class="underline" href="#">Stratuscent inc.</a></p>
+                    <p class="xs:right-4 lg:right-28 absolute bottom-[21%] right-28 text-text-color italic font-normal text-sm">Engineered by <a class="underline" href="#">Stratuscent inc.</a></p>
                 </div>
-                <div class="hidden relative ml-14 w-[550px] h-[500px]">
-                    <img class="absolute bottom-0 rounded-full w-full h-full" src="./dist/images/about2.gif" alt="about2" />
+                <div class="xs:mx-auto xs:max-w-[280px] xs:h-[280px] sm:h-[350px] sm:max-w-[350px] lg:max-w-[550px] lg:h-[550px] lg:ml-14 lg:mx-0 about-image hidden relative ml-14 max-w-[550px] h-[500px]">
+                    <img class="xs:mx-5 lg:mx-0 absolute bottom-0 rounded-full w-full h-full" src="./dist/images/about2.gif" alt="about2" />
                 </div>
             </div>
         </div>
 
-
-        <div class="grid grid-cols-2 px-8 mt-20 mb-52">
+        <div class="xs:grid-cols-1 md:grid-cols-2 grid grid-cols-2 px-8 mt-20 mb-20">
             <div class="">
                 <video class="w-full h-full" src="./dist/videos/NOZEabout1.mp4" autoplay loop muted="muted" playsinline></video>
             </div>
-            <div class=" pl-8">
-                <h2 class="text-left text-6xl text-secondary mb-12 font-medium">Conquer the Virus</h2>
-                <p class="text-left text-lg my-4 leading-8 text-text-color font-normal">Noze tracks the airborne markers (VOCs) associated with the Coronavirus family. Our AI uses that information to deliver a real-time risk index that will not only tell you if your space is prone to spreading the virus, but whether there's a chance the virus is actually in the air.</p>
+            <div class="xs:pl-0 md:pl-6 lg:pl-8">
+                <h2 class="xs:text-4xl lg:text-6xl text-left text-6xl text-secondary mb-12 font-medium">Conquer the Virus</h2>
+                <p class="xs:text-sm lg:text-lg text-left text-lg my-4 leading-8 text-text-color font-normal">Noze tracks the airborne markers (VOCs) associated with the Coronavirus family. Our AI uses that information to deliver a real-time risk index that will not only tell you if your space is prone to spreading the virus, but whether there's a chance the virus is actually in the air.</p>
             </div>
         </div>
 
-
-        <div class="grid grid-cols-2 my-8 px-16">
-            <div class="pr-8">
-                <h2 class="text-left text-6xl text-secondary mb-5 font-medium">Break the Mold</h2>
-                <p class="text-left text-lg my-4 leading-8 text-text-color font-normal">NOZE monitors the air for spores and other markers associated with the most common types of indoor mold. Our mold index will tell you if it's likely that there’s mold around and whether your space is in danger of being a breeding ground.</p>
+        <div class="xs:grid-cols-1 xs:px-8 md:grid-cols-2 lg:px-16 grid grid-cols-2 my-8 px-16">
+            <div class="xs:pr-0 md:pr-6 xs:order-1 md:order-0 lg:pr-8">
+                <h2 class="xs:text-4xl lg:text-6xl text-left text-6xl text-secondary mb-5 font-medium">Break the Mold</h2>
+                <p class="xs:text-sm lg:text-lg text-left text-lg my-4 leading-8 text-text-color font-normal">NOZE monitors the air for spores and other markers associated with the most common types of indoor mold. Our mold index will tell you if it's likely that there’s mold around and whether your space is in danger of being a breeding ground.</p>
             </div>
-            <div>
+            <div class="xs:order-0 md:order-1">
                 <video class="w-full h-full" src="./dist/videos/NOZEabout2.mp4" autoplay loop muted="muted" playsinline></video>
             </div>
         </div>
-    </div>
+    </section>
+
+
+
+<!--=======================================     MATTER-SECTION     =========================================-->
+    <section class="what-you-cant-section ">
+        <div class="xs:w-full md:container mx-auto">
+            <div>
+                <h2 class="xs:text-4xl lg:text-6xl text-center text-secondary font-medium">What you can't see matters.</h2>
+                <p class="max-w-lg mx-auto my-12 text-lg text-text-color text-center">NOZE also monitors a range of other pollutants to help make indoor spaces safer places to live, work, and visit.</p>
+            </div>
+            
+
+            <!--===========================     For Desktop     =====================-->
+            <div id="box" class="xs:hidden xl:block h-[100vh * 9] w-full"> 
+                <div class="h-full px-[5.7%]">
+                    <div id="wrapper" class="xs:grid-cols-2 lg:grid-cols-3 w-full h-full my-14 grid grid-cols-3">
+                        <ul id="sidebar" class="lg:col-span-1 divide-y-[22px] w-full h-full divide-transparent ">
+                            <li class="active-li text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Carbon Dioxide</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300" >Ammonia</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Formaldehyde</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Nitrogen Dioxide</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Butanal</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Particulate Matter</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Ethanol</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Tobacco Odour</li>
+                            <li class=" text-xl leading-8 text-text-secondary cursor-pointer hover:text-primary transition-all duration-300">Humidity</li>
+                        </ul>
+        
+                        <div id="items" class="lg:col-span-2">
+                            <div class="flex flex-col h-[570px] max-w-full overflow-hidden rounded-[2000px]">
+                                <div id="item1" class="flex item relative max-w-full min-h-[572px] border rounded text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters1.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Clouds our thinking, lowers productivity & affects our sleep.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Exhaled breath from people & pets and open flames are the most common sources.</p>
+                                </div>
+                                <div id="item2" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters2.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Irritates our noses and throats, amplifies allergies & triggers asthma.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Cleaning products are the most common sources.</p>
+                                </div>
+                                <div id="item3" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters3.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Irritates the eyes, nose, throat & skin - and is often linked to cancer.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Pressed wood products like easy-to-assemble furniture are the most common sources.</p>
+                                </div>
+                                <div id="item4" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters4.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Causes permanent damage to our respiratory system.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Wood fireplaces & fuel powered appliances are the most common sources.</p>
+                                </div>
+                                <div id="item5" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters6.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Irritates our lungs causing coughing and shortness of breath.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Garbage, scented candles & cigarette smoke are the most common sources.</p>
+                                </div>
+                                <div id="item6" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters7.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Irritates our lungs, aggravates allergies & can increase virus spread.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Cooking, cleaning & particles coming from the outdoors are the most common sources.</p>
+                                </div>
+                                <div id="item7" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters8.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Causes headaches, nausea & irritates our lungs.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">Cleaning detergents & hand sanitizers are the most common sources.</p>
+                                </div>
+                                <div id="item8" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters9.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Seeps into furniture and can linger in a space for a long time.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">If smoking is not allowed in your space, keep an eye behind closed doors.</p>
+                                </div>
+                                <div id="item9" class="hidden item relative w-full min-h-[572px] border text-center flex-col justify-center items-center bg-[url('/dist/images/matter/matters10.png')] bg-cover bg-center snap-start">
+                                    <h2 class="text-5xl px-24 leading-[60px] text-text-ternary text-center font-light mb-5 absolute top-[24%] ">Causes mold growth that triggers asthma & irritates our ears, nose and throat.</h2>
+                                    <p class="text-xl leading-9 px-[20%] text-center text-text-ternary absolute bottom-[18%]">If humidity is too low, viruses can more easily survive and be transmitted.</p>
+                                </div> 
+                            </div>   
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <!--===========================     For Mobile      =====================-->
+            <div class="xs:block xl:hidden swiper mySwiper mb-20">
+                <div class="swiper-wrapper h-screen w-full px-8">
+                    <div class="swiper-slide mb-6">
+                        <div class="swiper-slide xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters1.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Clouds our thinking, lowers productivity & affects our sleep.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Exhaled breath from people & pets and open flames are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Carbon Dioxide</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide mb-6">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters3.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Irritates the eyes, nose, throat & skin - and is often linked to cancer.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Pressed wood products like easy-to-assemble furniture are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Formaldehyde</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide mb-6">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters4.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Causes permanent damage to our respiratory system.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Wood fireplaces & fuel powered appliances are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Nitrogen Dioxide</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters6.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Irritates our lungs causing coughing and shortness of breath.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Garbage, scented candles & cigarette smoke are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Butanal</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters7.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Irritates our lungs, aggravates allergies & can increase virus spread.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Cooking, cleaning & particles coming from the outdoors are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Particulate Matter</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters8.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Causes headaches, nausea & irritates our lungs.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">Cleaning detergents & hand sanitizers are the most common sources.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Ethanol</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters9.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Seeps into furniture and can linger in a space for a long time.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">If smoking is not allowed in your space, keep an eye behind closed doors.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Tobacco Odour</h3>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="xs:h-[330px] xs:max-w-[90%] xs:mx-auto sm:h-[370px] md:max-w-[90%] md:h-[450px] lg:max-w-[800px] lg:h-[550px] max-w-[90%] h-[600px] mx-auto">
+                            <div class="xs:h-[270px] xs:max-w-[97%] xs:mx-auto sm:h-[330px] md:max-w-[90%] md:h-[400px] lg:max-w-[800px] lg:h-[500px] max-w-[90%] h-[400px] mx-auto border rounded-[2000px] text-center flex flex-col justify-center items-center bg-[url('/dist/images/matter/matters10.png')] bg-cover bg-center snap-start">
+                                <h2 class="xs:text-lg xs:px-8 md:text-4xl md:mb-7 lg:text-5xl text-5xl text-text-ternary text-center font-light mb-3 ">Causes mold growth that triggers asthma & irritates our ears, nose and throat.</h2>
+                                <p class="xs:text-sm xs:px-4 lg:text-lg lg:px-10 text-xl text-center text-text-ternary ">If humidity is too low, viruses can more easily survive and be transmitted.</p>
+                            </div>
+                            <h3 class="xs:text-lg md:text-xl font-bold text-secondary text-center mt-5">Humidity</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination" style="bottom: 0px; margin-top: 15px;"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--=======================================     VIDEO or FORM or FUNCTION-SECTION     =========================================-->
+    <section class="min-h-[2vh] w-full">
+        <div class="xs:my-10 lg:my-40">
+            <h2 class="xs:text-4xl lg:text-6xl xs:max-w-full lg:max-w-4xl mx-auto text-6xl text-center my-12 font-medium text-secondary px-4">What's more important, form or function?</h2>
+            <p class="text-lg text-text-color text-center px-4">We didn't think it was fair to have to choose.</p>
+        </div>
+        <div class="h-full flex justify-center items-center">
+            <video class="bg-text-ternary w-full h-fit z-20" type="video/mp4" autoplay muted loop playsinline src="./dist/videos/WALP.mp4"></video>
+        </div>
+    </section>
+
+
+
+<!--=======================================     FEATURES-SECTION     =========================================-->
+    <section class="xs:w-full lg:container mx-auto bg-white py-24 border">
+        <div class="xs:grid-cols-1 lg:grid-cols-3 grid grid-cols-3 min-h-[2vh] lg:ml-5">
+            <div class="xs:max-w-full xs:my-20 sm:max-w-md lg:my-0 lg:max-w-sm lg:col-span-1  max-w-sm justify-self-center">
+                <h2 class="xs:text-4xl xs:text-center lg:text-left lg:text-6xl sticky top-[100px] w-full text-secondary font-medium text-6xl px-4">Incredible power,right under your NOZE</h2>
+            </div>
+            <div class="lg:col-span-2 xs:px-6 md:px-[10%] lg:px-10">
+                <div class="xs:mx-auto xs:max-w-[300px] lg:max-w-[400px] sm:mx-0 max-w-lg text-center">
+                    <div class="xs:h-[270px] xs:max-w-[300px] sm:h-[300px] lg:h-[430px] lg:max-w-[400px] lg:max-h-[550px] max-w-lg max-h-[450px] flex justify-center items-center bg-border-color rounded-[1000px]  border">
+                        <img class="h-full my-5 w-5/6" src="./dist/images/6.png" alt="Incredible">
+                    </div>
+                    <h3 class="font-bold my-4 text-xl">Check In.</h3>
+                    <p class="xs:mx-auto lg:mx-0 max-w-sm px-4 text-lg text-text-color">Keep an eye on things in real-time so you can have peace of mind all the time.</p>
+                </div>
+
+                <div class="xs:mx-auto xs:max-w-[300px] xs:my-10 sm:mx-0 sm:ml-auto lg:max-w-[400px] lg:my-40 max-w-lg text-center my-40">
+                    <div class="xs:h-[270px] xs:max-w-[300px] sm:h-[300px] lg:h-[430px] lg:max-w-[400px] lg:max-h-[550px] max-w-lg max-h-[450px] flex justify-center items-center bg-border-color rounded-[1000px]  border">
+                        <img class="h-full my-5 w-5/6" src="./dist/images/8.png" alt="Incredible">
+                    </div>
+                    <h3 class="font-bold my-4 text-xl">Track it.</h3>
+                    <p class="max-w-sm px-4 text-lg text-text-color">Dive into the details to understand exactly what's going on so you can take action in the moment.</p>
+                </div>
+
+                <div class="xs:mx-auto xs:max-w-[300px] lg:max-w-[400px] sm:mx-0 lg:mb-40 max-w-lg text-center">
+                    <div class="xs:h-[270px] xs:max-w-[300px] sm:h-[300px] lg:h-[430px] lg:max-w-[400px] lg:max-h-[550px] max-w-lg max-h-[450px] flex justify-center items-center bg-border-color rounded-[1000px]  border">
+                        <img class="h-full my-5 w-5/6" src="./dist/images/9.png" alt="Incredible">
+                    </div>
+                    <h3 class="font-bold my-4 text-xl">Share it.</h3>
+                    <p class="max-w-sm px-4 text-lg text-text-color">Let others see what’s in the air before they come inside by sharing access to your Noze.</p>
+                    <span class="text-sm text-text-color italic">are you in a business? <a href="#"><img  class="inline" src="./dist/images/info.png" alt="info"></a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--=======================================     WONDERING IF YOU SHOUD GET A NOZE-SECTION     =========================================-->
+    <section class="w-full">
+        <div class="xs:grid-cols-1 sm:grid-cols-2 xs:justify-center xs:my-10 sm:items-center lg:my-52 xl:mt-52 xl:mb-0 grid grid-cols-2 mx-4 my-52">
+            <div class="xs:max-w-[280px] xs:h-[300px] sm:max-w-[300px] sm:h-[300px] lg:max-w-[480px] lg:h-[480px] max-w-[480px] h-[480px] mx-auto rounded-full overflow-hidden">
+                <img class="w-full h-full" src="./dist/images/06-1-copy.png" alt="">
+            </div>
+            <div class="xs:p-6 md:px-0 max-w-md text-left mx-auto">
+                <h2 class="xs:text-3xl xs:text-center sm:text-left md:text-4xl lg:text-6xl text-secondary my-6 font-medium">Wondering if you should get a NOZE?</h2>
+                <p class="xs:text-sm xs:my-1 lg:my-6 md:text-lg my-6 text-[#373F41]">Any way you slice it, it's a no brainer.</p>
+                <ul class="xs:divide-y-[10px] lg:divide-y-[25px] divide-transparent my-10">
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">1. Reduce Virus spread</p></li>
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">2. Watch out for Mold</p></li>
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">3. Keep Asthma in check</p></li>
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">4. Avoid Allergy flare ups</p></li>
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">5. Improve Your Sleep</p></li>
+                    <li><p class="xs:text-sm md:text-xl text-[#373F41]">6. Boost Productivity & Focus</p></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+<!--=======================================     FAQ SECTION     =========================================-->
+    <section id="faq-section" class="xl:pt-20 faq-section">
+        <div class="xs:w-full md:container mx-auto my-14">
+            <h2 class="xs:text-4xl lg:text-6xl text-secondary font-medium text-center my-10">FAQs</h2>
+            <div id="faq-wrapper" class="mx-5">
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">How is NOZE different from other air quality monitors?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">The technology behind NOZE is based on a digital nose sensor (also known as an e-nose). With this sensor, NOZE can precisely detect a wide range of pollutants and chemicals. In contrast, almost all other air quality monitors on the market today use a bundle of off-the-shelf sensors that are limited in what they can detect and can vary widely in quality, accuracy and reliability.</p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">What is a digital nose?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">A digital nose is a breakthrough technology that digitizes the sense of smell. It’s similar to how the camera digitized the sense of sight and the microphone digitized the sense of hearing.</p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">What is the Virus Risk Index?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">The Virus Risk Index is an AI-powered tool built into NOZE to help make indoor spaces safer places to live, work, and visit by monitoring the risk of virus transmission (tracking how conducive the air is to spreading the virus) and the risk of virus presence (tracking the likelihood that the virus is in the air).
+                        <br> <br>
+                        Note: The Virus Risk Index is not intended to be an alternative to precautionary measures or laboratory testing.
+                    </p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">How does the Virus Risk Index work?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">The Virus Risk Index is a 10 point scale where values between 1 and 8 indicate an increasing risk of virus transmission, while values of 9 and 10 indicate a likelihood that the virus pathogen is present. To calculate this score, our AI analyzes five things: Airborne Volatiles related to the Coronavirus and Influenza, Particulate Matter, Temperature, Humidity and Carbon Dioxide.</p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">What space can it cover?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">The molecules in every gas and odour have different properties which impact how far they can travel and how fast they can be detected. A good rule of thumb for a typical indoor space is that NOZE can cover an area of up to 800 square feet (80 square meters) without barriers like walls or doors.</p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">How many NOZE devices do I need?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">If you want to monitor different rooms at the same time, we suggest that you place one NOZE in each room, depending on the layout. If you only have one NOZE then you should monitor the room where you spend most of your time or are the most concerned about.</p>
+                </div>
+
+                <div class="xs:px-3 xs:py-2 sm:py-3 sm:px-4 md:px-6 faq max-h-[75px] py-3 my-5 border border-primary rounded-[30px] px-6 overflow-hidden transition-all duration-500">
+                    <div class="my-1 flex justify-between items-center cursor-pointer">
+                        <h2 class="xs:text-[14px] sm:text-[16px] md:text-xl text-xl text-secondary font-semibold cursor-pointer">What is the Warranty on NOZE?</h2>
+                        <span class="text-4xl font-light text-text-secondary cursor-pointer">+</span>
+                    </div>
+                    <p class="xs:text-xs sm:text-[14px] md:text-lg mt-5 mb-1 text-text-color text-lg leading-8">NOZE comes with a one-year limited warranty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--=======================================     SUBSCRIBE SECTION     =========================================-->    
+    <section class="subscribe-section">
+        <div class="xs:h-[60vh] lg:h-[80vh] w-full flex flex-col justify-center items-center">
+            <h2 class="xs:text-4xl lg:text-6xl text-secondary font-medium text-center">Stay connected with NOZE</h2>
+            <p class="my-10 sm:px-4 text-text-secondary text-lg max-w-[450px] text-center leading-8">NOZE is an AI powered air quality monitor that works to keep you safe. Breathe easy.</p>
+            <button class="btn">Join The Waitlist</button>
+        </div>
+    </section>
+   
+
+
+<!--=======================================     FOOTER SECTION     =========================================-->
+    <footer class="xs:mb-[64px] xs:px-1 xs:grid-cols-1 xs:py-2 sm:py-0 sm:grid-cols-2 md:px-[7%] md:mb-0 min-h-[80px] w-full grid grid-cols-2 items-center justify-items-center bg-[#f6f5fa] px-[7%]">
+        <div class="xs:justify-evenly lg:justify-between w-full flex justify-evenly">
+            <ul class="sm:px-2 flex">
+                <li class="w-5 h-5"><a href="#"><img class="w-5 h-5" src="./dist/images/Social/Facebook.png" alt=""></a></li>
+                <li class="w-5 h-5 mx-2"><a href="#"><img class="w-5 h-5" src="./dist/images/Social/twitter.png" alt=""></a></li>
+                <li class="w-5 h-5"><a href="#"><img class="w-5 h-5" src="./dist/images/Social/instagram.png" alt=""></a></li>
+            </ul>
+            <p class="xs:text-xs md:text-lg">2021 NOZE</p>
+        </div>
+        <ul class="xs:divide-x-[10px] lg:divide-x-[25px] flex divide-transparent mr-3">
+            <li><a class="xs:text-xs md:text-lg" href="#">Privacy Policy</a></li>
+            <li><a class="xs:text-xs md:text-lg" href="#">Terms of Use</a></li>
+            <li><a class="xs:text-xs md:text-lg" href="#">Contact</a></li>
+        </ul>
+    </footer>
 
     <script src="./dist/js/main.js"></script>
 </body>
