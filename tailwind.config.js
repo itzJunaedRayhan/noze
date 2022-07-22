@@ -1,6 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./*.{html,js}', './dist/pages/*.{html,js}'],
+  purge: ['./dist/*.{html,js}', './dist/pages/*.{html,js}'],
   theme: {
     screens: {
       'xs': '320px',
