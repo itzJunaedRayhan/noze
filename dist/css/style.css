@@ -539,10 +539,6 @@ h1, h2, h3, h4, h5, h6, p, li{
   }
 }
 
-.visible{
-  visibility: visible;
-}
-
 .fixed{
   position: fixed;
 }
@@ -809,16 +805,8 @@ h1, h2, h3, h4, h5, h6, p, li{
   display: flex;
 }
 
-.table{
-  display: table;
-}
-
 .grid{
   display: grid;
-}
-
-.contents{
-  display: contents;
 }
 
 .hidden{
@@ -999,20 +987,8 @@ h1, h2, h3, h4, h5, h6, p, li{
   max-width: 450px;
 }
 
-.border-collapse{
-  border-collapse: collapse;
-}
-
-.transform{
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .cursor-pointer{
   cursor: pointer;
-}
-
-.resize{
-  resize: both;
 }
 
 .snap-start{
@@ -1202,10 +1178,6 @@ h1, h2, h3, h4, h5, h6, p, li{
   background-image: url('/images/matter/matters1.png');
 }
 
-.bg-\[url\(\'\/images\/matter\/matters2\.png\'\)\]{
-  background-image: url('/images/matter/matters2.png');
-}
-
 .bg-\[url\(\'\/images\/matter\/matters3\.png\'\)\]{
   background-image: url('/images/matter/matters3.png');
 }
@@ -1232,58 +1204,6 @@ h1, h2, h3, h4, h5, h6, p, li{
 
 .bg-\[url\(\'\/images\/matter\/matters10\.png\'\)\]{
   background-image: url('/images/matter/matters10.png');
-}
-
-.bg-\[url\(\'\.\/\'\)\]{
-  background-image: url('./');
-}
-
-.bg-\[url\(\'\.\/images\/\'\)\]{
-  background-image: url('./images/');
-}
-
-.bg-\[url\(\'\.\/images\/matter\/\'\)\]{
-  background-image: url('./images/matter/');
-}
-
-.bg-\[url\(\'\.\/images\/matter\/matters1\.png\'\)\]{
-  background-image: url('./images/matter/matters1.png');
-}
-
-.bg-\[url\(\'\.\/images\/matter\/matters2\.png\'\)\]{
-  background-image: url('./images/matter/matters2.png');
-}
-
-.bg-\[url\(\'\.\.\/\'\)\]{
-  background-image: url('../');
-}
-
-.bg-\[url\(\'\.\.\/dist\/\'\)\]{
-  background-image: url('../dist/');
-}
-
-.bg-\[url\(\'\.\.\/dist\/images\/\'\)\]{
-  background-image: url('../dist/images/');
-}
-
-.bg-\[url\(\'\.\.\/dist\/images\/matter\'\)\]{
-  background-image: url('../dist/images/matter');
-}
-
-.bg-\[url\(\'\.\.\/dist\/images\/matter\/\'\)\]{
-  background-image: url('../dist/images/matter/');
-}
-
-.bg-\[url\(\'\.\.\/dist\/images\/matter\/matters1\.png\'\)\]{
-  background-image: url('../dist/images/matter/matters1.png');
-}
-
-.bg-\[url\(\'\/matter\/matters1\.png\'\)\]{
-  background-image: url('/matter/matters1.png');
-}
-
-.bg-\[url\(\'\*\/matter\/matters1\.png\'\)\]{
-  background-image: url('*/matter/matters1.png');
 }
 
 .bg-cover{
@@ -1520,20 +1440,8 @@ h1, h2, h3, h4, h5, h6, p, li{
           text-decoration-line: underline;
 }
 
-.outline{
-  outline-style: solid;
-}
-
 .transition-all{
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition{
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2303,6 +2211,11 @@ h1, h2, h3, h4, h5, h6, p, li{
 
   .xl\:hidden{
     display: none;
+  }
+
+  .xl\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .xl\:pt-20{
